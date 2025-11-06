@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Goals</title>
+    <style>
+        body { font-family: Arial; padding: 30px; background-color: #f5f5f5; }
+        h1 { text-align: center; background-color: maroon; color: white; padding: 15px; border-radius: 10px; }
+        table { margin: 20px auto; border-collapse: collapse; width: 80%; }
+        th, td { border: 1px solid black; padding: 10px; text-align: center; }
+        th { background-color: #ccc; }
+        tr:nth-child(even) { background-color: #eee; }
+    </style>
+</head>
+<body>
+    <h1>My Goals</h1>
+
+    <table>
+        <tr>
+            <th>Calories To Burn</th>
+            <th>Calories Burned</th>
+        </tr>
+        <tr th:each="goal : ${goalsList}">
+            <td th:text="${goal.caloriesToBurn}"></td>
+            <td th:text="${goal.caloriesBurned}"></td>
+        </tr>
+		
+		<button> back to home page</button>
+    </table>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Workouts</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: maroon;
+            color: white;
+            padding: 15px 20px;
+        }
+        header h1 {
+            margin: 0;
+        }
+        nav {
+            margin-top: 10px;
+        }
+        nav a, nav button {
+            margin-right: 15px;
+            text-decoration: none;
+            color: white;
+            background-color: darkred;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        main {
+            padding: 20px;
+        }
+        fieldset {
+            background-color: #fff0f0;
+            border: 2px solid maroon;
+            border-radius: 8px;
+            padding: 15px;
+            max-width: 700px;
+            margin: 20px auto;
+        }
+        legend {
+            color: maroon;
+            font-weight: bold;
+            padding: 0 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            border: 1px solid maroon;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #ffe6e6;
+            color: maroon;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Fitness Home</h1>
+    <div class="welcome">
+        Welcome: <span th:text="${session.USERLOGGEDIN != null} ? ${session.USERLOGGEDIN.name} : 'Guest'"></span>
+    </div>
+    <nav>
+        <a th:href="@{/workout/new}">Create Workout</a>
+        <a th:href="@{/workouts}">View Workouts</a>
+        <a th:href="@{/goals/new}">Set Goal</a>
+        <a th:href="@{/goals}">View Goals</a>
+        <form th:action="@{/logout}" method="post" style="display:inline;">
+            <button type="submit">Logout</button>
+        </form>
+    </nav>
+</header>
+
+<main>
+    <fieldset>
+        <legend>Your Workouts</legend>
+        <p th:if="${#lists.isEmpty(workouts)}">
+            No workouts found. Please <a th:href="@{/workout/new}">create a workout</a>.
+        </p>
+        <table th:if="${!#lists.isEmpty(workouts)}">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Type</th>
+                    <th>Duration (mins)</th>
+                    <th>Calories Burned</th>
+                </tr>
+				
+            </thead>
+            <tbody>
+                <tr th:each="w : ${workouts}">
+                    <td th:text="${w.id}"></td>
+                    <td th:text="${w.type}"></td>
+                    <td th:text="${w.duration}"></td>
+                    <td th:text="${w.caloriesBurned}"></td>
+                </tr>
+            </tbody> 
+			
+			
+        </table>
+    </fieldset>
+</main>
+
+</body>
+</html>

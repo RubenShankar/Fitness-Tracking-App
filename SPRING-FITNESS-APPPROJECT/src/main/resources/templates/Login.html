@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+        }
+        fieldset {
+            border: 2px solid maroon;
+            padding: 20px;
+            max-width: 400px;
+            margin: 50px auto;
+            background-color: #fff;
+            border-radius: 8px;
+        }
+        legend {
+            color: maroon;
+            font-weight: bold;
+        }
+        input[type=text], input[type=password] {
+            width: 100%;
+            padding: 8px;
+            margin: 6px 0 12px 0;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: maroon;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            border-radius: 4px;
+        }
+        button:hover {
+            background-color: darkred;
+        }
+        p.error {
+            color: red;
+            margin-top: 10px;
+        }
+        p.register {
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <form th:action="@{/login}" th:object="${user}" method="post">
+        <fieldset>
+            <legend>Login</legend>
+
+            <label for="username">Username:</label>
+            <input id="username" type="text" th:field="*{name}" placeholder="Enter username" required />
+
+            <label for="password">Password:</label>
+            <input id="password" type="password" th:field="*{password}" placeholder="Enter password" required />
+
+            <button type="submit">Login</button>
+
+            <!-- Error message -->
+            <p th:if="${msg}" th:text="${msg}" class="error"></p>
+
+            <p class="register">Not registered? <a th:href="@{/register}">Register here</a></p>
+        </fieldset>
+    </form>
+</body>
+</html>
+

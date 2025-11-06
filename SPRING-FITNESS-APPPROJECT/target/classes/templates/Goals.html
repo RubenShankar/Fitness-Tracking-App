@@ -1,0 +1,81 @@
+<!-- Goal.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create a New Goal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        fieldset {
+            border: 2px solid maroon;
+            border-radius: 8px;
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            background-color: #fff0f0;
+        }
+        legend {
+            color: maroon;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: maroon;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .msg {
+            color: red;
+            text-align: center;
+        }
+        .link {
+            text-align: center;
+            margin-top: 15px;
+        }
+        .link a {
+            color: maroon;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<h2 style="text-align:center; color: maroon;">Create a New Goal</h2>
+
+<div th:if="${msg}" class="msg" th:text="${msg}"></div>
+
+<form th:action="@{/goals}" th:object="${goal}" method="post">
+    <fieldset>
+        <legend>Goal Details</legend>
+
+        <label>Calories To Burn:</label>
+        <input type="number" th:field="*{caloriesToBurn}" placeholder="Enter target calories" required />
+
+        <label>Calories Burned:</label>
+        <input type="number" th:field="*{caloriesBurned}" placeholder="Enter calories burned" required />
+
+        <button type="submit">Create Goal</button>
+    </fieldset>
+</form>
+
+<div class="link">
+    <a href="/goals">View All Goals</a>
+</div>
+
+</body>
+</html>

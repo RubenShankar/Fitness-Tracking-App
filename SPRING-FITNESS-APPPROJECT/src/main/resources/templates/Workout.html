@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Workout</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: maroon;
+            color: white;
+            padding: 15px 20px;
+        }
+        header h1 {
+            margin: 0;
+        }
+        nav {
+            margin-top: 10px;
+        }
+        nav a, nav button {
+            margin-right: 15px;
+            text-decoration: none;
+            color: white;
+            background-color: darkred;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        main {
+            padding: 20px;
+        }
+        fieldset {
+            background-color: #fff0f0;
+            border: 2px solid maroon;
+            border-radius: 8px;
+            padding: 15px;
+            max-width: 500px;
+            margin: 20px auto;
+        }
+        legend {
+            color: maroon;
+            font-weight: bold;
+            padding: 0 10px;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        button.submit-btn {
+            background-color: maroon;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .welcome {
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Fitness Home</h1>
+    <div class="welcome">
+        Welcome: <span th:text="${session.USERLOGGEDIN != null} ? ${session.USERLOGGEDIN.name} : 'Guest'"></span>
+    </div>
+    <nav>
+        <a th:href="@{/workout/new}">Create Workout</a>
+        <a th:href="@{/goals/new}">Set Goal</a>
+        <a th:href="@{/goals}">View Goals</a>
+        <form th:action="@{/logout}" method="post" style="display:inline;">
+			<button type="submit">Logout</button>
+        </form>
+    </nav>
+</header>
+
+<main>
+    <fieldset>
+        <legend>Create Workout</legend>
+
+		<form th:action="@{/workout/new}" th:object="${workout}" method="post">
+		    <label>Type:</label>
+		    <input type="text" th:field="*{type}" required />
+
+		    <label>Duration (minutes):</label>
+		    <input type="number" th:field="*{duration}" required />
+
+		    <button type="submit">Create Workout</button>
+			
+			
+		</form>
+    </fieldset>
+</main>
+
+</body>
+</html>

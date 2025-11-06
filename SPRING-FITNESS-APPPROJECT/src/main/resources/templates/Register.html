@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FITNESS-REGISTER</title>
+    <style>
+        legend {
+            background-color: blue;
+            color: White;
+            border: 2px solid black;
+            border-radius: 0px 10px 0px 10px;
+            padding: 5px 5px;
+        }
+        form {
+            margin: auto;
+            height: 70%;
+            width: 40%;
+            border: 1px solid black;
+            background-color: maroon;
+        }
+        fieldset {
+            background-color: rgb(198, 198, 198);
+        }
+        .error-msg {
+            color: red;
+            font-weight: bold;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+
+   
+
+    <form th:action="@{/register}" th:object="${user}" method="post">
+        <fieldset>
+            <legend>Registration form</legend>
+            <table>
+                <tr>
+                    <td><label>UserName:</label></td>
+                    <td><input type="text" th:field="*{name}" placeholder="Enter your name"></td>
+                    <td><div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" style="color: red;"></div></td>
+                </tr>
+                <tr>
+                    <td><label>Password:</label></td>
+                    <td><input type="password" th:field="*{password}" placeholder="Enter your password"></td>
+                    <td><div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" style="color: red;"></div></td>
+                </tr>
+                <tr>
+                    <td><label>Age:</label></td>
+                    <td><input type="number" th:field="*{age}" placeholder="Enter your age"></td>
+                    <td><div th:if="${#fields.hasErrors('age')}" th:errors="*{age}" style="color: red;"></div></td>
+                </tr>
+                <tr>
+                    <td><label>Email:</label></td>
+                    <td><input type="email" th:field="*{email}" placeholder="Enter your email"></td>
+                    <td><div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" style="color: red;"></div></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><button type="submit">Register</button></td>
+                </tr>
+				
+				<!-- Error/Info Message Display -->
+				   <div th:if="${msg}" class="error-msg" th:text="${msg}"></div>
+            </table>
+        </fieldset>
+    </form>
+
+</body>
+</html>
